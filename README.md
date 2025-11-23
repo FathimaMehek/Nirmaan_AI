@@ -52,7 +52,7 @@ The scoring engine (scoring_engine.py) performs multiple layers of analysis:
 
 3. Rule-Based Scoring (from rubric.json)
 
-  Each metric in the rubric contains:
+    Each metric in the rubric contains:
 - Weight
 - Numeric ranges
 - Keyword lists
