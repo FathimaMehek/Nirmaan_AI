@@ -1,0 +1,174 @@
+{
+  "rubric": [
+    {
+      "criterion": "Content & Structure",
+      "weight": 40,
+      "metrics": [
+        {
+          "metric": "Salutation Level",
+          "weight": 5,
+          "rules": {
+            "no_salutation": 0,
+            "normal": 2,
+            "good": 4,
+            "excellent": 5
+          },
+          "keywords": {
+            "normal": ["hi", "hello"],
+            "good": [
+              "good morning", "good afternoon",
+              "good evening", "good day", "hello everyone"
+            ],
+            "excellent": [
+              "i am excited to introduce",
+              "feeling great"
+            ]
+          }
+        },
+        {
+          "metric": "Keyword Presence",
+          "weight": 30,
+          "rules": {
+            "must_have_each_4": {
+              "score_per_item": 4,
+              "items": [
+                "name",
+                "age",
+                "school",
+                "class",
+                "family",
+                "hobbies",
+                "interests",
+                "what they like to do in free time"
+              ]
+            },
+            "good_to_have_each_2": {
+              "score_per_item": 2,
+              "items": [
+                "about family",
+                "origin location",
+                "i am from",
+                "parents are from",
+                "ambition",
+                "goal",
+                "dream",
+                "interesting thing",
+                "fun fact",
+                "unique point",
+                "strengths",
+                "achievements"
+              ]
+            }
+          }
+        },
+        {
+          "metric": "Flow",
+          "weight": 5,
+          "rules": {
+            "order_followed": 5,
+            "order_not_followed": 0
+          },
+          "expected_order": [
+            "salutation",
+            "basic details (name, age, class/school, place)",
+            "additional details (all good to have)",
+            "closing"
+          ]
+        }
+      ]
+    },
+    {
+      "criterion": "Speech Rate",
+      "weight": 10,
+      "metrics": [
+        {
+          "metric": "Speech Rate (WPM)",
+          "weight": 10,
+          "rules": {
+            "too_fast": { "range": ">161", "score": 2 },
+            "fast":     { "range": "141-160", "score": 6 },
+            "ideal":    { "range": "111-140", "score": 10 },
+            "slow":     { "range": "81-110", "score": 6 },
+            "too_slow": { "range": "<80", "score": 2 }
+          }
+        }
+      ]
+    },
+    {
+      "criterion": "Language & Grammar",
+      "weight": 20,
+      "metrics": [
+        {
+          "metric": "Grammar Error Count",
+          "weight": 10,
+          "rules": {
+            ">0.9": 10,
+            "0.7-0.89": 8,
+            "0.5-0.69": 6,
+            "0.3-0.49": 4,
+            "<0.3": 2
+          },
+          "formula": "grammar_score = 1 - min(errors_per_100_words / 10, 1)"
+        },
+        {
+          "metric": "Vocabulary Richness (TTR)",
+          "weight": 10,
+          "rules": {
+            "0.9-1.0": 10,
+            "0.7-0.89": 8,
+            "0.5-0.69": 6,
+            "0.3-0.49": 4,
+            "0.0-0.29": 2
+          },
+          "formula": "TTR = distinct_words / total_words"
+        }
+      ]
+    },
+    {
+      "criterion": "Clarity",
+      "weight": 15,
+      "metrics": [
+        {
+          "metric": "Filler Word Rate",
+          "weight": 15,
+          "rules": {
+            "0-3": 15,
+            "4-6": 12,
+            "7-9": 9,
+            "10-12": 6,
+            "13+": 3
+          },
+          "filler_words": [
+            "um", "uh", "like", "you know", "so", "actually",
+            "basically", "right", "i mean", "well", "kinda",
+            "sort of", "okay", "hmm", "ah"
+          ],
+          "formula": "filler_rate = (filler_count / total_words) * 100"
+        }
+      ]
+    },
+    {
+      "criterion": "Engagement",
+      "weight": 15,
+      "metrics": [
+        {
+          "metric": "Sentiment / Positivity Score",
+          "weight": 15,
+          "rules": {
+            ">=0.9": 15,
+            "0.7-0.89": 12,
+            "0.5-0.69": 9,
+            "0.3-0.49": 6,
+            "<0.3": 3
+          },
+          "sentiment_labels": {
+            "positive": ["enthusiastic", "confident", "grateful"],
+            "neutral": ["factual", "calm"],
+            "negative": ["disinterested", "anxious", "dull"]
+          },
+          "recommended_tool": "VADER sentiment intensity analyzer"
+        }
+      ]
+    }
+  ]
+}
