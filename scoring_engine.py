@@ -8,7 +8,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from nltk.sentiment import SentimentIntensityAnalyzer
 
+import nltk
 
+try:
+    nltk.data.find("sentiment/vader_lexicon")
+except LookupError:
+    nltk.download("vader_lexicon")
+    
 # ------------ Load rubric & NLP models -----------------
 
 RUBRIC_PATH = Path(__file__).parent / "rubric.json"
@@ -429,3 +435,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
